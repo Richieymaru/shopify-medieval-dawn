@@ -953,6 +953,9 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+                {%- if settings.sdd_show_product -%}
+                  {%- render 'same-day-delivery-notice', variant: 'full' -%}
+                {%- endif -%}
                 <div class="available-gateway">
                   <img
                     src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/gcash.B8fyM1U4.svg"
