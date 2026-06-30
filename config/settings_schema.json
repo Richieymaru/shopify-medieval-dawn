@@ -1556,12 +1556,6 @@
       },
       {
         "type": "checkbox",
-        "id": "sdd_show_announcement",
-        "label": "Announcement bar",
-        "default": true
-      },
-      {
-        "type": "checkbox",
         "id": "sdd_show_product",
         "label": "Product page (under buy buttons)",
         "default": true
