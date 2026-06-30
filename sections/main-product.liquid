@@ -953,9 +953,6 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
-                {%- if settings.sdd_show_product -%}
-                  {%- render 'same-day-delivery-notice', variant: 'full', display: 'card' -%}
-                {%- endif -%}
                 <div class="available-gateway">
                   <img
                     src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/gcash.B8fyM1U4.svg"
@@ -1048,6 +1045,9 @@
                     class="_1tgdqw61 _1tgdqw60 _1fragemwu _1fragemwp _1fragemx4 _1fragemsc _1tgdqw66"
                   >
                 </div>
+                {%- if settings.sdd_show_product -%}
+                  {%- render 'same-day-delivery-notice', variant: 'full', display: 'card' -%}
+                {%- endif -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
