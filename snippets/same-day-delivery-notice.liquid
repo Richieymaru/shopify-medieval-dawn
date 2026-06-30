@@ -1,17 +1,19 @@
 {% comment %}
-  Renders the same-day delivery informational notice.
+  Renders the same-day delivery notice as a positive perk.
   Accepts:
   - variant: {String} 'short' (announcement bar, cart) or 'full' (product page). Default 'short'.
+  - display: {String} 'card' (boxed perk for cart/product) or 'bar' (slim inline for announcement bar). Default 'card'.
 
   Reads all content from theme settings (settings.sdd_*).
   Renders nothing when the feature is disabled or the chosen message is blank.
 
   Usage:
-  {% render 'same-day-delivery-notice', variant: 'full' %}
+  {% render 'same-day-delivery-notice', variant: 'full', display: 'card' %}
 {% endcomment %}
 
 {%- liquid
   assign sdd_variant = variant | default: 'short'
+  assign sdd_display = display | default: 'card'
   if sdd_variant == 'full'
     assign sdd_message = settings.sdd_message_full
   else
@@ -20,55 +22,134 @@
 -%}
 
 {%- if settings.sdd_enabled and sdd_message != blank -%}
+  {%- capture sdd_truck -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M1 3.5h13v10H1z"/>
+      <path d="M14 7h4l3 3.2v3.3h-7z"/>
+      <circle cx="5.5" cy="17.5" r="2.2"/>
+      <circle cx="17.5" cy="17.5" r="2.2"/>
+    </svg>
+  {%- endcapture -%}
+
   {%- style -%}
-    .sdd-notice {
+    .sdd-notice { --sdd-accent: 22, 163, 74; }
+
+    /* ----- Card (cart + product): reads as a perk, not a warning ----- */
+    .sdd-notice--card {
       display: flex;
       align-items: flex-start;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      padding: 0.8rem 1rem;
-      margin: 1rem 0;
-      border: 1px solid rgba(var(--color-foreground), 0.15);
-      border-radius: var(--inputs-radius, 0.4rem);
-      background: rgba(var(--color-foreground), 0.04);
-      font-size: 1.4rem;
-      line-height: 1.4;
+      gap: 1rem;
+      margin: 1.2rem 0;
+      padding: 1.1rem 1.2rem;
+      border: 1px solid rgba(var(--sdd-accent), 0.28);
+      border-radius: 1.2rem;
+      background:
+        linear-gradient(135deg, rgba(var(--sdd-accent), 0.12), rgba(var(--sdd-accent), 0.03));
     }
-    .sdd-notice--short { margin: 0.6rem 0; padding: 0.6rem 0.9rem; font-size: 1.3rem; }
-    .sdd-notice__icon { flex: 0 0 auto; width: 1.8rem; height: 1.8rem; margin-top: 0.1rem; }
-    .sdd-notice__icon .icon { width: 100%; height: 100%; }
-    .sdd-notice__body { flex: 1 1 12rem; }
-    .sdd-notice__body > * { margin: 0; }
+    .sdd-notice__badge {
+      flex: 0 0 auto;
+      width: 3.4rem;
+      height: 3.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgb(var(--sdd-accent));
+      box-shadow: 0 0.3rem 0.8rem rgba(var(--sdd-accent), 0.4);
+    }
+    .sdd-notice__badge svg { width: 1.9rem; height: 1.9rem; color: #fff; }
+    .sdd-notice__content { flex: 1 1 12rem; min-width: 0; }
+    .sdd-notice__title {
+      margin: 0 0 0.2rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: rgb(var(--color-foreground));
+    }
+    .sdd-notice__text {
+      margin: 0;
+      font-size: 1.3rem;
+      line-height: 1.45;
+      color: rgba(var(--color-foreground), 0.75);
+    }
+    .sdd-notice__text > * { margin: 0; }
     .sdd-notice__cta {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.5rem;
+      gap: 0.5rem;
+      margin-top: 0.9rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      background: rgb(var(--sdd-accent));
+      color: #fff;
+      font-size: 1.25rem;
       font-weight: 600;
-      text-decoration: underline;
+      text-decoration: none;
+      transition: transform 0.15s ease, filter 0.15s ease;
     }
-    .sdd-notice__cta .icon { width: 1.5rem; height: 1.5rem; }
+    .sdd-notice__cta:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .sdd-notice__cta svg { width: 1.4rem; height: 1.4rem; }
+
+    /* ----- Bar (announcement): slim, inline, sits on the bar's own background ----- */
+    .sdd-notice--bar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.9rem;
+      font-size: 1.3rem;
+      line-height: 1.3;
+    }
+    .sdd-notice--bar .sdd-notice__inline-icon { width: 1.6rem; height: 1.6rem; flex: 0 0 auto; }
+    .sdd-notice--bar .sdd-notice__text { color: inherit; }
+    .sdd-notice--bar .sdd-notice__cta-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 0.25rem;
+      color: inherit;
+    }
+    .sdd-notice--bar .sdd-notice__cta-text svg { width: 1.3rem; height: 1.3rem; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sdd-notice__cta { transition: none; }
+      .sdd-notice__cta:hover { transform: none; }
+    }
   {%- endstyle -%}
 
-  <div class="sdd-notice sdd-notice--{{ sdd_variant }}">
-    <span class="sdd-notice__icon" aria-hidden="true">{% render 'icon-info' %}</span>
-    <div class="sdd-notice__body">
-      {%- if sdd_variant == 'full' -%}
-        {{ sdd_message }}
-      {%- else -%}
-        <p>{{ sdd_message | escape }}</p>
-      {%- endif -%}
+  {%- if sdd_display == 'bar' -%}
+    <div class="sdd-notice sdd-notice--bar">
+      <span class="sdd-notice__inline-icon">{{ sdd_truck }}</span>
+      <span class="sdd-notice__text">{{ sdd_message | strip_html | escape }}</span>
       {%- if settings.sdd_messenger_url != blank -%}
-        <a
-          class="sdd-notice__cta"
-          href="{{ settings.sdd_messenger_url }}"
-          target="_blank"
-          rel="noopener"
-        >
+        <a class="sdd-notice__cta-text" href="{{ settings.sdd_messenger_url }}" target="_blank" rel="noopener">
+          {{ settings.sdd_button_label | default: 'Message us' | escape }}
           {% render 'icon-facebook' %}
-          {{ settings.sdd_button_label | default: 'Message us on Messenger' | escape }}
         </a>
       {%- endif -%}
     </div>
-  </div>
+  {%- else -%}
+    <div class="sdd-notice sdd-notice--card">
+      <span class="sdd-notice__badge">{{ sdd_truck }}</span>
+      <div class="sdd-notice__content">
+        <p class="sdd-notice__title">Get it today!</p>
+        <div class="sdd-notice__text">
+          {%- if sdd_variant == 'full' -%}
+            {{ sdd_message }}
+          {%- else -%}
+            <p>{{ sdd_message | escape }}</p>
+          {%- endif -%}
+        </div>
+        {%- if settings.sdd_messenger_url != blank -%}
+          <a class="sdd-notice__cta" href="{{ settings.sdd_messenger_url }}" target="_blank" rel="noopener">
+            {% render 'icon-facebook' %}
+            {{ settings.sdd_button_label | default: 'Message us on Messenger' | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
 {%- endif -%}

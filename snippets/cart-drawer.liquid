@@ -696,10 +696,6 @@
 
         <!-- CTAs -->
 
-        {%- if settings.sdd_show_cart -%}
-          {%- render 'same-day-delivery-notice', variant: 'short' -%}
-        {%- endif -%}
-
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <button
             type="submit"
@@ -714,6 +710,9 @@
             {% render 'icon-lock' %} &nbsp;CHECKOUT - {{ cart.total_price | money }}
           </button>
         </div>
+        {%- if settings.sdd_show_cart -%}
+          {%- render 'same-day-delivery-notice', variant: 'short', display: 'card' -%}
+        {%- endif -%}
         <ul style="display: flex; align-items: center; justify-content: center; gap: 5px; padding:0; margin-top: 10px; margin-bottom: 0">
           We are Shipping thru
           <img src="https://cdn.shopify.com/s/files/1/0896/3309/5983/files/JT-Express-Logo.png?v=1729276641" width="60" height="30"/>

@@ -954,7 +954,7 @@
                   show_pickup_availability: true
                 -%}
                 {%- if settings.sdd_show_product -%}
-                  {%- render 'same-day-delivery-notice', variant: 'full' -%}
+                  {%- render 'same-day-delivery-notice', variant: 'full', display: 'card' -%}
                 {%- endif -%}
                 <div class="available-gateway">
                   <img

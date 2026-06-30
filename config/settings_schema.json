@@ -1524,13 +1524,13 @@
         "type": "text",
         "id": "sdd_message_short",
         "label": "Short message (announcement bar & cart)",
-        "default": "Same-day delivery available 10AM–9PM (PayMongo orders)."
+        "default": "Same-day delivery, 10AM–9PM — pay via GCash, Maya, or card."
       },
       {
         "type": "richtext",
         "id": "sdd_message_full",
         "label": "Full message (product page)",
-        "default": "<p>We offer <strong>same-day delivery (10AM–9PM)</strong> for orders paid online via PayMongo (card, GCash, Maya). Not available for Cash on Delivery. Message us on Messenger to arrange it.</p>"
+        "default": "<p>Order today and get it <strong>same-day (10AM–9PM)</strong> when you pay online with GCash, Maya, or card.</p>"
       },
       {
         "type": "text",
