@@ -1524,7 +1524,7 @@
         "type": "text",
         "id": "sdd_message_short",
         "label": "Short message (announcement bar & cart)",
-        "default": "Need it today? Same-day delivery available 10AM–9PM on prepaid (PayMongo) orders."
+        "default": "Same-day delivery available 10AM–9PM (PayMongo orders)."
       },
       {
         "type": "richtext",
