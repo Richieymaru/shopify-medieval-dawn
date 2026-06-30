@@ -696,6 +696,10 @@
 
         <!-- CTAs -->
 
+        {%- if settings.sdd_show_cart -%}
+          {%- render 'same-day-delivery-notice', variant: 'short' -%}
+        {%- endif -%}
+
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <button
             type="submit"
