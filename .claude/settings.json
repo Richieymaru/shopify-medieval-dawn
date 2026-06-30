@@ -6,7 +6,22 @@
       "Bash(node -e ' *)",
       "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('config/settings_schema.json','utf8'\\)\\);JSON.parse\\(require\\('fs'\\).readFileSync\\('sections/header-group.json','utf8'\\)\\);console.log\\('both JSON valid'\\)\")",
       "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('config/settings_schema.json','utf8'\\)\\);console.log\\('schema JSON valid'\\)\")",
-      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('config/settings_schema.json','utf8'\\)\\);JSON.parse\\(require\\('fs'\\).readFileSync\\('sections/header-group.json','utf8'\\)\\);console.log\\('JSON valid'\\)\")"
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('config/settings_schema.json','utf8'\\)\\);JSON.parse\\(require\\('fs'\\).readFileSync\\('sections/header-group.json','utf8'\\)\\);console.log\\('JSON valid'\\)\")",
+      "WebFetch(domain:apps.shopify.com)",
+      "Bash(node scripts/search_docs.mjs \"payment customization run hide payment method based on selected delivery shipping option\" --model claude-opus-4-8 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"payment customization run result hide operation selectedDeliveryOption deliveryGroups title\" --model claude-opus-4-8 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"payment customization hide payment method operation HideOperation FunctionRunResult rust example\" --model claude-opus-4-8 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/validate.mjs --code ' *)",
+      "Bash(node scripts/validate.mjs --api functions_payment_customization --code ' *)",
+      "Bash(shopify app *)",
+      "Bash(cd \"c:/Users/stain/OneDrive/Dokumen/GitHub/medieval-dawn-checkout-app\")",
+      "Bash(find extensions/hide-cod-same-day -type f -not -path \"*/node_modules/*\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\stain\\OneDrive\\Dokumen\\GitHub\\medieval-dawn-checkout-app\\extensions\\hide-cod-same-day",
+      "c:\\Users\\stain\\OneDrive\\Dokumen\\GitHub\\medieval-dawn-checkout-app\\extensions\\cod-rule\\src",
+      "c:\\Users\\stain\\OneDrive\\Dokumen\\GitHub\\medieval-dawn-checkout-app\\extensions\\cod-rule",
+      "c:\\Users\\stain\\OneDrive\\Dokumen\\GitHub\\medieval-dawn-checkout-app"
     ]
   }
 }
