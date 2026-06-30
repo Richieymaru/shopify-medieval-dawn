@@ -42,34 +42,9 @@
     70%  { box-shadow: 0 0 0 0.7rem rgba(255,255,255,0); }
     100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
   }
-  .sdd-info-icon::after{
-    content: attr(data-tooltip);
-    position: absolute;
-    top: calc(100% + 0.7rem);
-    left: 50%;
-    transform: translateX(-50%) translateY(0.3rem);
-    width: max-content;
-    max-width: 24rem;
-    padding: 0.7rem 0.9rem;
-    background: #1a1a1a;
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 1.35;
-    text-transform: none;
-    border-radius: 0.6rem;
-    box-shadow: 0 0.4rem 1.2rem rgba(0,0,0,0.3);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s ease, transform 0.15s ease;
-    z-index: 6;
-  }
-  .sdd-info-icon:hover::after,
-  .sdd-info-icon:focus-visible::after{
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  /* Tooltip is the native title attribute now (no absolute box = no overflow). */
+  /* Belt-and-suspenders: stop any stray element from creating a sideways scroll. */
+  body{ overflow-x: clip; }
   @media (prefers-reduced-motion: reduce){
     .sdd-info-icon{ animation: none; }
   }
@@ -131,7 +106,7 @@
               <a
                 class="sdd-info-icon"
                 href="{{ sdd_info_link }}"
-                data-tooltip="{{ settings.sdd_info_tooltip | default: 'Tap to see how our same-day delivery works' | escape }}"
+                title="{{ settings.sdd_info_tooltip | default: 'Tap to see how our same-day delivery works' | escape }}"
                 aria-label="Learn more about same-day delivery"
               >
                 {% render 'icon-info' %}
