@@ -1506,5 +1506,72 @@
         "label": "Collection 4"
       }
     ]
+  },
+  {
+    "name": "Same-Day Delivery Notice",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Informational notice about same-day delivery (PayMongo/prepaid only, arranged via Messenger). Shows on the announcement bar, product page, and cart drawer."
+      },
+      {
+        "type": "checkbox",
+        "id": "sdd_enabled",
+        "label": "Enable same-day delivery notice",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "sdd_message_short",
+        "label": "Short message (announcement bar & cart)",
+        "default": "Need it today? Same-day delivery available 10AM–9PM on prepaid (PayMongo) orders."
+      },
+      {
+        "type": "richtext",
+        "id": "sdd_message_full",
+        "label": "Full message (product page)",
+        "default": "<p>We offer <strong>same-day delivery (10AM–9PM)</strong> for orders paid online via PayMongo (card, GCash, Maya). Not available for Cash on Delivery. Message us on Messenger to arrange it.</p>"
+      },
+      {
+        "type": "text",
+        "id": "sdd_hours",
+        "label": "Delivery hours label",
+        "default": "10AM–9PM"
+      },
+      {
+        "type": "url",
+        "id": "sdd_messenger_url",
+        "label": "Messenger link",
+        "info": "Use the m.me link to open a chat directly, e.g. https://m.me/MedievalMNL"
+      },
+      {
+        "type": "text",
+        "id": "sdd_button_label",
+        "label": "Button label",
+        "default": "Message us on Messenger"
+      },
+      {
+        "type": "header",
+        "content": "Show in these locations"
+      },
+      {
+        "type": "checkbox",
+        "id": "sdd_show_announcement",
+        "label": "Announcement bar",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sdd_show_product",
+        "label": "Product page (under buy buttons)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sdd_show_cart",
+        "label": "Cart drawer",
+        "default": true
+      }
+    ]
   }
 ]
