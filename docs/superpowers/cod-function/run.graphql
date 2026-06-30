@@ -1,0 +1,13 @@
+query Input {
+  cart {
+    deliveryGroups {
+      selectedDeliveryOption {
+        title
+      }
+    }
+  }
+  paymentMethods {
+    id
+    name
+  }
+}
