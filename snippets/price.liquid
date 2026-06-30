@@ -165,5 +165,10 @@
     Free Shipping
   </span>
 {% endif %}
+{% if settings.sdd_enabled %}
+  <span class="badge price__badge-sale" style="background-color:rgb(254, 226, 226);color:rgb(220, 38, 38);border: 1px solid rgb(220, 38, 38);">
+    Same Day Delivery
+  </span>
+{% endif %}
   </div>
 {% endunless %}
