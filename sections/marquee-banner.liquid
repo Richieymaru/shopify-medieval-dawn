@@ -1,0 +1,238 @@
+<style>
+  .marquee-banner {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-block: {{ section.settings.mobile_padding }}px;
+  }
+
+  .marquee-banner__inner {
+    display: flex;
+    animation: scroll {{ section.settings.marquee_speed }}s linear infinite;
+    align-items: center;s
+  }
+
+  .marquee-banner__text {
+    white-space: nowrap;
+    font-size: {{ section.settings.mobile_font_size }}px;
+    padding: 0 {{ section.settings.mobile_text_spacing }}px;
+    {% if section.settings.capitalise_text %}
+      text-transform: uppercase;
+    {% endif %}
+    font-weight: 600
+  }
+
+  .dot-spacing {
+    color: {{ section.settings.text_color }};
+    height: 22px;
+  }
+
+  {% if section.settings.toggle_pause_on_hover %}
+    .marquee-banner__inner {
+      animation-play-state: running;
+    }
+
+    .marquee-banner:hover .marquee-banner__inner {
+      animation-play-state: paused;
+    }
+  {% endif %}
+
+  @media (min-width: 1024px) {
+    .marquee-banner {
+      padding-block: {{ section.settings.desktop_padding }}px;
+    }
+
+    .marquee-banner__text {
+      font-size: {{ section.settings.desktop_font_size }}px;
+      padding: 0 {{ section.settings.desktop_text_spacing }}px;
+    }
+  }
+
+  @keyframes scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d({{ section.settings.direction }}, 0, 0); }
+  }
+</style>
+<section class="marquee-banner" style="background-color: {{ section.settings.background_color }}">
+  {% for i in (1..5) %}
+    <div
+      class="marquee-banner__inner"
+      aria-hidden="true"
+    >
+      {% for block in section.blocks %}
+        {% if block.settings.text != blank %}
+          <span class="marquee-banner__text" style="color: {{ section.settings.text_color }}">
+            {{ block.settings.text }}
+          </span>
+          {% if section.settings.dot_spacing %}
+            <span class="dot-spacing">
+              <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27.9998 14.0002C21.0084 14.0002 14.0171 7.01662 14.0008 0.0248886V0.000389041C14.0008 0.00427788 14.0004 0.00855565 14.0004 0.0124445C14.0004 0.00816676 14 0.00427772 14 0V0.0244999C13.9836 7.01662 6.99268 14.0002 0.000938416 14.0002C7.00084 14.0002 14.0008 21.0001 14.0008 28C14.0008 21.0001 21.0007 14.0002 28.0006 14.0002H27.9998Z" fill="{{ section.settings.text_color }}"/>
+              </svg>
+            </span>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Marquee Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#FFFFFF",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#000000",
+      "label": "Text Color"
+    },
+    {
+      "type": "header",
+      "content": "Font Sizes"
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Font Size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "desktop_font_size",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop Font Size",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop Padding",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_spacing",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Text Spacing",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "desktop_text_spacing",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop Text Spacing",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Additional Settings"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "sec",
+      "label": "Marquee Speed",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Marquee Direction",
+      "default": "-100%",
+      "options": [
+        {
+          "label": "Left",
+          "value": "-100%"
+        },
+        {
+          "label": "Right",
+          "value": "100%"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "toggle_pause_on_hover",
+      "label": "Toggle Pause on Hover",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "dot_spacing",
+      "label": "Dot spacing between text",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "capitalise_text",
+      "label": "Capitalise Text",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "marquee_strip",
+      "name": "Marquee Strip",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Banner",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

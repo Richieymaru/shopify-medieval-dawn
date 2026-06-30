@@ -1,0 +1,13 @@
+{% style %}
+  .hr_{{ block.id }} {
+    background-color: {{ block.settings.hr_color }};
+    margin-top: {{ block.settings.hr_margin_top }}px;
+    margin-bottom: {{ block.settings.hr_margin_bottom }}px;
+    width: {{ block.settings.hr_width }}%;
+    height: {{ block.settings.hr_height }}px;
+    margin-left: {% if block.settings.hr_text_align == "left" %}0{% elsif block.settings.hr_text_align == 'right' %}auto{% else %}auto{% endif %};
+    margin-right: {% if block.settings.hr_text_align == "right" %}0{% elsif block.settings.hr_text_align == 'left' %}auto{% else %}auto{% endif %};
+    border-width: 0px;
+  }
+{% endstyle %}
+<hr class="hr_{{ block.id }}" />

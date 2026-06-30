@@ -1,0 +1,108 @@
+{% comment %}
+  Renders a header search modal. Should be used with 'header.liquid'
+
+  Accepts:
+  - input_id: {String} Id for the search input element (required)
+
+  Usage:
+  {% render 'header-search', input_id: 'My-Id'%}
+{% endcomment %}
+
+<details-modal class="header__search">
+  <details>
+    <summary
+      class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle"
+      aria-haspopup="dialog"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
+      <span>
+        <svg class="icon icon-search" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.3248 22.1751L18.2396 17.0909C19.7135 15.3214 20.4485 13.0518 20.2916 10.7542C20.1347 8.45657 19.0981 6.30789 17.3974 4.75512C15.6967 3.20234 13.4628 2.36503 11.1604 2.41735C8.85803 2.46968 6.66448 3.40761 5.03605 5.03605C3.40761 6.66448 2.46968 8.85803 2.41735 11.1604C2.36503 13.4628 3.20234 15.6967 4.75512 17.3974C6.30789 19.0981 8.45657 20.1347 10.7542 20.2916C13.0518 20.4485 15.3214 19.7135 17.0909 18.2396L22.1751 23.3248C22.2506 23.4003 22.3403 23.4602 22.4389 23.5011C22.5375 23.5419 22.6432 23.5629 22.75 23.5629C22.8567 23.5629 22.9625 23.5419 23.0611 23.5011C23.1597 23.4602 23.2493 23.4003 23.3248 23.3248C23.4003 23.2493 23.4602 23.1597 23.5011 23.0611C23.5419 22.9625 23.5629 22.8567 23.5629 22.75C23.5629 22.6432 23.5419 22.5375 23.5011 22.4389C23.4602 22.3403 23.4003 22.2506 23.3248 22.1751ZM4.06249 11.375C4.06249 9.92871 4.49136 8.51491 5.29487 7.31238C6.09837 6.10985 7.24043 5.17258 8.57661 4.61912C9.9128 4.06565 11.3831 3.92084 12.8016 4.203C14.2201 4.48515 15.523 5.1816 16.5457 6.20427C17.5684 7.22694 18.2648 8.5299 18.547 9.94839C18.8291 11.3669 18.6843 12.8372 18.1309 14.1734C17.5774 15.5095 16.6401 16.6516 15.4376 17.4551C14.2351 18.2586 12.8213 18.6875 11.375 18.6875C9.43625 18.6853 7.57754 17.9142 6.20664 16.5433C4.83575 15.1724 4.06464 13.3137 4.06249 11.375Z" fill="black"/>
+        </svg>
+        <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg" class="modal__toggle-close icon icon-close">
+          <path d="M20.8873 20.2376C20.9628 20.3131 21.0227 20.4028 21.0635 20.5014C21.1044 20.6 21.1254 20.7057 21.1254 20.8125C21.1254 20.9193 21.1044 21.025 21.0635 21.1236C21.0227 21.2222 20.9628 21.3118 20.8873 21.3873C20.8118 21.4628 20.7222 21.5227 20.6236 21.5636C20.5249 21.6044 20.4192 21.6254 20.3125 21.6254C20.2057 21.6254 20.1 21.6044 20.0014 21.5636C19.9027 21.5227 19.8131 21.4628 19.7376 21.3873L13 14.6487L6.26231 21.3873C6.10985 21.5398 5.90307 21.6254 5.68746 21.6254C5.47186 21.6254 5.26508 21.5398 5.11262 21.3873C4.96016 21.2349 4.87451 21.0281 4.87451 20.8125C4.87451 20.5969 4.96016 20.3901 5.11262 20.2376L11.8513 13.5L5.11262 6.76234C4.96016 6.60988 4.87451 6.4031 4.87451 6.18749C4.87451 5.97189 4.96016 5.76511 5.11262 5.61265C5.26508 5.46019 5.47186 5.37454 5.68746 5.37454C5.90307 5.37454 6.10985 5.46019 6.26231 5.61265L13 12.3513L19.7376 5.61265C19.8901 5.46019 20.0969 5.37454 20.3125 5.37454C20.5281 5.37454 20.7348 5.46019 20.8873 5.61265C21.0398 5.76511 21.1254 5.97189 21.1254 6.18749C21.1254 6.4031 21.0398 6.60988 20.8873 6.76234L14.1486 13.5L20.8873 20.2376Z" fill="black"/>
+        </svg>
+      </span>
+    </summary>
+    <div
+      class="search-modal modal__content gradient"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
+      <div class="modal-overlay"></div>
+      <div
+        class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
+        tabindex="-1"
+      >
+        {%- if settings.predictive_search_enabled -%}
+          <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+        {%- else -%}
+          <search-form class="search-modal__form">
+        {%- endif -%}
+        <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+          <div class="field">
+            <input
+              class="search__input field__input"
+              id="{{ input_id }}"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ 'general.search.search' | t }}"
+              {%- if settings.predictive_search_enabled -%}
+                role="combobox"
+                aria-expanded="false"
+                aria-owns="predictive-search-results"
+                aria-controls="predictive-search-results"
+                aria-haspopup="listbox"
+                aria-autocomplete="list"
+                autocorrect="off"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+              {%- endif -%}
+            >
+            <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
+            <input type="hidden" name="options[prefix]" value="last">
+            <button
+              type="reset"
+              class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}"
+              aria-label="{{ 'general.search.reset' | t }}"
+            >
+              <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg" class="modal__toggle-close icon icon-close">
+                <path d="M20.8873 20.2376C20.9628 20.3131 21.0227 20.4028 21.0635 20.5014C21.1044 20.6 21.1254 20.7057 21.1254 20.8125C21.1254 20.9193 21.1044 21.025 21.0635 21.1236C21.0227 21.2222 20.9628 21.3118 20.8873 21.3873C20.8118 21.4628 20.7222 21.5227 20.6236 21.5636C20.5249 21.6044 20.4192 21.6254 20.3125 21.6254C20.2057 21.6254 20.1 21.6044 20.0014 21.5636C19.9027 21.5227 19.8131 21.4628 19.7376 21.3873L13 14.6487L6.26231 21.3873C6.10985 21.5398 5.90307 21.6254 5.68746 21.6254C5.47186 21.6254 5.26508 21.5398 5.11262 21.3873C4.96016 21.2349 4.87451 21.0281 4.87451 20.8125C4.87451 20.5969 4.96016 20.3901 5.11262 20.2376L11.8513 13.5L5.11262 6.76234C4.96016 6.60988 4.87451 6.4031 4.87451 6.18749C4.87451 5.97189 4.96016 5.76511 5.11262 5.61265C5.26508 5.46019 5.47186 5.37454 5.68746 5.37454C5.90307 5.37454 6.10985 5.46019 6.26231 5.61265L13 12.3513L19.7376 5.61265C19.8901 5.46019 20.0969 5.37454 20.3125 5.37454C20.5281 5.37454 20.7348 5.46019 20.8873 5.61265C21.0398 5.76511 21.1254 5.97189 21.1254 6.18749C21.1254 6.4031 21.0398 6.60988 20.8873 6.76234L14.1486 13.5L20.8873 20.2376Z" fill="black"/>
+              </svg>
+            </button>
+            <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+              <svg class="icon icon-search" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.3248 22.1751L18.2396 17.0909C19.7135 15.3214 20.4485 13.0518 20.2916 10.7542C20.1347 8.45657 19.0981 6.30789 17.3974 4.75512C15.6967 3.20234 13.4628 2.36503 11.1604 2.41735C8.85803 2.46968 6.66448 3.40761 5.03605 5.03605C3.40761 6.66448 2.46968 8.85803 2.41735 11.1604C2.36503 13.4628 3.20234 15.6967 4.75512 17.3974C6.30789 19.0981 8.45657 20.1347 10.7542 20.2916C13.0518 20.4485 15.3214 19.7135 17.0909 18.2396L22.1751 23.3248C22.2506 23.4003 22.3403 23.4602 22.4389 23.5011C22.5375 23.5419 22.6432 23.5629 22.75 23.5629C22.8567 23.5629 22.9625 23.5419 23.0611 23.5011C23.1597 23.4602 23.2493 23.4003 23.3248 23.3248C23.4003 23.2493 23.4602 23.1597 23.5011 23.0611C23.5419 22.9625 23.5629 22.8567 23.5629 22.75C23.5629 22.6432 23.5419 22.5375 23.5011 22.4389C23.4602 22.3403 23.4003 22.2506 23.3248 22.1751ZM4.06249 11.375C4.06249 9.92871 4.49136 8.51491 5.29487 7.31238C6.09837 6.10985 7.24043 5.17258 8.57661 4.61912C9.9128 4.06565 11.3831 3.92084 12.8016 4.203C14.2201 4.48515 15.523 5.1816 16.5457 6.20427C17.5684 7.22694 18.2648 8.5299 18.547 9.94839C18.8291 11.3669 18.6843 12.8372 18.1309 14.1734C17.5774 15.5095 16.6401 16.6516 15.4376 17.4551C14.2351 18.2586 12.8213 18.6875 11.375 18.6875C9.43625 18.6853 7.57754 17.9142 6.20664 16.5433C4.83575 15.1724 4.06464 13.3137 4.06249 11.375Z" fill="black"/>
+              </svg>
+            </button>
+          </div>
+
+          {%- if settings.predictive_search_enabled -%}
+            <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+              {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+            </div>
+
+            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+          {%- endif -%}
+        </form>
+        {%- if settings.predictive_search_enabled -%}
+          </predictive-search>
+        {%- else -%}
+          </search-form>
+        {%- endif -%}
+        <button
+          type="button"
+          class="search-modal__close-button modal__close-button link link--text focus-inset"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          <svg class="icon icon-close" aria-hidden="true" focusable="false">
+            <use href="#icon-close">
+          </svg>
+        </button>
+      </div>
+    </div>
+  </details>
+</details-modal>

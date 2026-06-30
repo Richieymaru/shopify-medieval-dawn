@@ -1,0 +1,76 @@
+{% style %}
+  .hero-banner{
+    line-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-banner a{
+    text-decoration: none;
+    display: block;
+    line-height: 0;
+    overflow: hidden;
+  }
+  .hero-banner .hero-banner__thumbnail{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .hero-banner:hover img {
+    transform: scale(1.03);
+  }
+  .hero-banner img {
+    transition: all .4s ease-in-out !important;
+  }
+{% endstyle %}
+
+{% if section.settings.desktop_banner != blank %}
+  <div class="hero-banner">
+    {% if section.settings.banner_link != blank %}
+      {% assign collection_name =  section.settings.banner_link | remove: '/collections/' | replace: '-', ' ' %}
+      <a href="{{ section.settings.banner_link }}" aria-label="Learn More About {{ collection_name }}">
+    {% endif %}
+      {% if section.settings.lazyload_image %}
+        {{ section.settings.desktop_banner | image_url: width: 1920 | image_tag: class: "hero-banner__thumbnail small-hide medium-hide", loading: "lazy" }}
+        {{ section.settings.mobile_banner | image_url: width: 990 | image_tag: class: "hero-banner__thumbnail large-up-hide", loading: "lazy" }}
+      {% else %}
+        {{ section.settings.desktop_banner | image_url: width: 1920 | image_tag: class: "hero-banner__thumbnail small-hide medium-hide" }}
+        {{ section.settings.mobile_banner | image_url: width: 990 | image_tag: class: "hero-banner__thumbnail large-up-hide" }}
+      {% endif %}
+    {% if section.settings.banner_link != blank %}
+      </a>
+    {% endif %}
+  </div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Hero Banner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "desktop_banner",
+        "label": "Desktop Banner"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_banner",
+        "label": "Mobile Banner"
+      },
+      {
+        "type": "url",
+        "id": "banner_link",
+        "label": "Banner Link"
+      },
+      {
+        "type": "checkbox",
+        "id": "lazyload_image",
+        "label": "Add Lazy Load to the Image?"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Banner V2"
+      }
+    ]
+  }
+{% endschema %}

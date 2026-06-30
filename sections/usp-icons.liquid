@@ -1,0 +1,133 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  .usp-icon-container .page-width {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  .usp-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .usp-icon .inline-richtext {
+    margin-left: 10px;
+    color: rgba(var(--color-foreground), 1);
+    line-height: normal;
+    padding-top: 1px;
+  }
+  .usp-icon-badge {
+    display: flex;
+  }
+
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+    .usp-icon-container .page-width {
+      background-color: white;
+    }
+    .usp-icon-badge {
+      padding: 13px;
+      border-radius: 40px;
+    }
+    .usp-icon {
+      flex-direction: column;
+      width: 25%;
+    }
+    .usp-icon .inline-richtext {
+      margin-left: 0px;
+      padding-top: 8px;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+{%- endstyle -%}
+
+<div class="usp-icon-container color-{{ section.settings.color_scheme }}">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- for block in section.blocks -%}
+        <div class="usp-icon">
+          {% if block.settings.image %}
+            <div class="usp-icon-badge color-{{ section.settings.color_scheme }}">
+              {{ block.settings.image | image_url: width: 30 | image_tag: loading: 'lazy' }}
+            </div>
+          {% endif %}
+          <span class="inline-richtext">{{- block.settings.title -}}</span>
+        </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Unique proposition",
+    "tag": "section",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "background-1"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 16
+      }
+    ],
+    "blocks": [
+      {
+        "type": "icon",
+        "name": "t:sections.multicolumn.blocks.column.name",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Icon upload (SVG)"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "title",
+            "default": "Free Ultra Fast Shipping",
+            "label": "Unique selling proposition"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Unique proposition",
+      "blocks": [
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        }
+      ]
+    }]
+  }
+{% endschema %}

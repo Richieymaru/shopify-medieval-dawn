@@ -1,0 +1,415 @@
+{% comment %}
+  Renders product variant-picker
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant picker is associated.
+  Usage:
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+{%- unless product.has_only_default_variant -%}
+  <variant-selects
+    id="variant-selects-{{ section.id }}"
+    data-section="{{ section.id }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- for option in product.options_with_values -%}
+      {%- liquid
+        assign swatch_count = option.values | map: 'swatch' | compact | size
+        assign picker_type = block.settings.picker_type
+
+        if swatch_count > 0 and block.settings.swatch_shape != 'none'
+          if block.settings.picker_type == 'dropdown'
+            assign picker_type = 'swatch_dropdown'
+          else
+            assign picker_type = 'swatch'
+          endif
+        endif
+      -%}
+      {%- if picker_type == 'swatch' -%}
+        <fieldset class="js product-form__input product-form__input--swatch variant_product">
+          <legend class="form__label">
+            <span class="option_name">{{ option.name }}:</span>
+            <span data-selected-value>
+              {{- option.selected_value -}}
+            </span>
+          </legend>
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
+          %}
+        </fieldset>
+      {%- elsif picker_type == 'button' -%}
+        <fieldset class="js product-form__input product-form__input--pill variant_product">
+          <legend class="form__label">
+            <span class="option_name">{{ option.name }}: <span class="selected_value">{{ option.selected_value }}</span></span>
+            {% if option.name == 'Size' %}
+              {% if size_guide == true %}
+                <a class="modal-url measuring_containter" id="openModalBtn">{% render 'measuring' %} Size Guide</a>
+              {% endif %}
+              <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <div class="heading-modal">
+                    <h4>Size Guide</h4>
+                    <span class="close"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg></span>
+                  </div>
+                  <div class="image-table">
+                    <!-- <div class="bg"></div> -->
+                    {{ block.settings.image_table | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                    {% if size_row == "two-rows" %}
+                      <table class="size-chart">
+                        <thead>
+                          <tr>
+                              <th>{{ th_1 }}</th>
+                              <th>{{ th_2 }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% if td_1 != blank %}
+                            <tr>
+                                <td>{{ td_1 }}</td>
+                                <td>{{ td_7 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_2 != blank %}
+                            <tr>
+                                <td>{{ td_2 }}</td>
+                                <td>{{ td_8 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_3 != blank %}
+                            <tr>
+                                <td>{{ td_3 }}</td>
+                                <td>{{ td_9 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_4 != blank %}
+                            <tr>
+                                <td>{{ td_4 }}</td>
+                                <td>{{ td_10 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_5 != blank %}
+                            <tr>
+                                <td>{{ td_5 }}</td>
+                                <td>{{ td_11 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_6 != blank %}
+                            <tr>
+                                <td>{{ td_6 }}</td>
+                                <td>{{ td_12 }}</td>
+                            </tr>
+                          {% endif %}
+                        </tbody>
+                      </table>
+                    {% elsif size_row == "three-rows" %}
+                      <table class="size-chart">
+                        <thead>
+                          <tr>
+                              <th>{{ th_1 }}</th>
+                              <th>{{ th_2 }}</th>
+                              <th>{{ th_3 }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% if td_1 != blank %}
+                            <tr>
+                                <td>{{ td_1 }}</td>
+                                <td>{{ td_7 }}</td>
+                                <td>{{ td_13 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_2 != blank %}
+                            <tr>
+                                <td>{{ td_2 }}</td>
+                                <td>{{ td_8 }}</td>
+                                <td>{{ td_14 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_3 != blank %}
+                            <tr>
+                                <td>{{ td_3 }}</td>
+                                <td>{{ td_9 }}</td>
+                                <td>{{ td_15 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_4 != blank %}
+                            <tr>
+                                <td>{{ td_4 }}</td>
+                                <td>{{ td_10 }}</td>
+                                <td>{{ td_16 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_5 != blank %}
+                            <tr>
+                                <td>{{ td_5 }}</td>
+                                <td>{{ td_11 }}</td>
+                                <td>{{ td_17 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_6 != blank %}
+                            <tr>
+                                <td>{{ td_6 }}</td>
+                                <td>{{ td_12 }}</td>
+                                <td>{{ td_18 }}</td>
+                            </tr>
+                          {% endif %}
+                        </tbody>
+                      </table>
+                    {% elsif size_row == "four-rows" %}
+                      <table class="size-chart">
+                        <thead>
+                          <tr>
+                              <th>{{ th_1 }}</th>
+                              <th>{{ th_2 }}</th>
+                              <th>{{ th_3 }}</th>
+                              <th>{{ th_4 }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% if td_1 != blank %}
+                            <tr>
+                                <td>{{ td_1 }}</td>
+                                <td>{{ td_7 }}</td>
+                                <td>{{ td_13 }}</td>
+                                <td>{{ td_19 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_2 != blank %}
+                            <tr>
+                                <td>{{ td_2 }}</td>
+                                <td>{{ td_8 }}</td>
+                                <td>{{ td_14 }}</td>
+                                <td>{{ td_20 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_3 != blank %}
+                            <tr>
+                                <td>{{ td_3 }}</td>
+                                <td>{{ td_9 }}</td>
+                                <td>{{ td_15 }}</td>
+                                <td>{{ td_21 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_4 != blank %}
+                            <tr>
+                                <td>{{ td_4 }}</td>
+                                <td>{{ td_10 }}</td>
+                                <td>{{ td_16 }}</td>
+                                <td>{{ td_22 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_5 != blank %}
+                            <tr>
+                                <td>{{ td_5 }}</td>
+                                <td>{{ td_11 }}</td>
+                                <td>{{ td_17 }}</td>
+                                <td>{{ td_23 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_6 != blank %}
+                            <tr>
+                                <td>{{ td_6 }}</td>
+                                <td>{{ td_12 }}</td>
+                                <td>{{ td_18 }}</td>
+                                <td>{{ td_24 }}</td>
+                            </tr>
+                          {% endif %}
+                        </tbody>
+                      </table>
+                    {% elsif size_row == "five-rows" %}
+                      <table class="size-chart">
+                        <thead>
+                          <tr>
+                              <th>{{ th_1 }}</th>
+                              <th>{{ th_2 }}</th>
+                              <th>{{ th_3 }}</th>
+                              <th>{{ th_4 }}</th>
+                              <th>{{ th_5 }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% if td_1 != blank %}
+                            <tr>
+                                <td>{{ td_1 }}</td>
+                                <td>{{ td_7 }}</td>
+                                <td>{{ td_13 }}</td>
+                                <td>{{ td_19 }}</td>
+                                <td>{{ td_25 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_2 != blank %}
+                            <tr>
+                                <td>{{ td_2 }}</td>
+                                <td>{{ td_8 }}</td>
+                                <td>{{ td_14 }}</td>
+                                <td>{{ td_20 }}</td>
+                                <td>{{ td_26 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_3 != blank %}
+                            <tr>
+                                <td>{{ td_3 }}</td>
+                                <td>{{ td_9 }}</td>
+                                <td>{{ td_15 }}</td>
+                                <td>{{ td_21 }}</td>
+                                <td>{{ td_27 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_4 != blank %}
+                            <tr>
+                                <td>{{ td_4 }}</td>
+                                <td>{{ td_10 }}</td>
+                                <td>{{ td_16 }}</td>
+                                <td>{{ td_22 }}</td>
+                                <td>{{ td_28 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_5 != blank %}
+                            <tr>
+                                <td>{{ td_5 }}</td>
+                                <td>{{ td_11 }}</td>
+                                <td>{{ td_17 }}</td>
+                                <td>{{ td_23 }}</td>
+                                <td>{{ td_29 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_6 != blank %}
+                            <tr>
+                                <td>{{ td_6 }}</td>
+                                <td>{{ td_12 }}</td>
+                                <td>{{ td_18 }}</td>
+                                <td>{{ td_24 }}</td>
+                                <td>{{ td_30 }}</td>
+                            </tr>
+                          {% endif %}
+                        </tbody>
+                      </table>
+                    {% elsif size_row == "six-rows" %}
+                      <table class="size-chart">
+                        <thead>
+                          <tr>
+                              <th>{{ th_1 }}</th>
+                              <th>{{ th_2 }}</th>
+                              <th>{{ th_3 }}</th>
+                              <th>{{ th_4 }}</th>
+                              <th>{{ th_5 }}</th>
+                              <th>{{ th_6 }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% if td_1 != blank %}
+                            <tr>
+                                <td>{{ td_1 }}</td>
+                                <td>{{ td_7 }}</td>
+                                <td>{{ td_13 }}</td>
+                                <td>{{ td_19 }}</td>
+                                <td>{{ td_25 }}</td>
+                                <td>{{ td_31 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_2 != blank %}
+                            <tr>
+                                <td>{{ td_2 }}</td>
+                                <td>{{ td_8 }}</td>
+                                <td>{{ td_14 }}</td>
+                                <td>{{ td_20 }}</td>
+                                <td>{{ td_26 }}</td>
+                                <td>{{ td_32 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_3 != blank %}
+                            <tr>
+                                <td>{{ td_3 }}</td>
+                                <td>{{ td_9 }}</td>
+                                <td>{{ td_15 }}</td>
+                                <td>{{ td_21 }}</td>
+                                <td>{{ td_27 }}</td>
+                                <td>{{ td_33 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_4 != blank %}
+                            <tr>
+                                <td>{{ td_4 }}</td>
+                                <td>{{ td_10 }}</td>
+                                <td>{{ td_16 }}</td>
+                                <td>{{ td_22 }}</td>
+                                <td>{{ td_28 }}</td>
+                                <td>{{ td_34 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_5 != blank %}
+                            <tr>
+                                <td>{{ td_5 }}</td>
+                                <td>{{ td_11 }}</td>
+                                <td>{{ td_17 }}</td>
+                                <td>{{ td_23 }}</td>
+                                <td>{{ td_29 }}</td>
+                                <td>{{ td_35 }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if td_6 != blank %}
+                            <tr>
+                                <td>{{ td_6 }}</td>
+                                <td>{{ td_12 }}</td>
+                                <td>{{ td_18 }}</td>
+                                <td>{{ td_24 }}</td>
+                                <td>{{ td_30 }}</td>
+                                <td>{{ td_36 }}</td>
+                            </tr>
+                          {% endif %}
+                        </tbody>
+                      </table>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </legend>
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
+          %}
+        </fieldset>
+      {%- else -%}
+        <div class="product-form__input product-form__input--dropdown">
+          <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+            {{ option.name }}
+          </label>
+          <div class="select">
+            {%- if picker_type == 'swatch_dropdown' -%}
+              <span
+                data-selected-value
+                class="dropdown-swatch"
+              >
+                {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
+              </span>
+            {%- endif -%}
+            <select
+              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+              class="select__select"
+              name="options[{{ option.name | escape }}]"
+              form="{{ product_form_id }}"
+            >
+              {% render 'product-variant-options',
+                product: product,
+                option: option,
+                block: block,
+                picker_type: picker_type
+              %}
+            </select>
+            {% render 'icon-caret' %}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
+  </variant-selects>
+{%- endunless -%}

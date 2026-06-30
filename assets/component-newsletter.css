@@ -1,0 +1,127 @@
+.newsletter__wrapper{
+  background: #F7F8F9;
+}
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter-form {
+    align-items: flex-start;
+    margin: 0 auto;
+  }
+}
+
+.newsletter_sign_up{
+  align-items: center;
+    display: flex;
+    justify-content: center;
+  width: 100%;
+}
+
+.newsletter-form__field-wrapper {
+  width: 100%;
+}
+
+.newsletter-form__field-wrapper .field__input {
+  padding-right: 5rem;
+  /* max-width: 41.6rem; */
+  height: 100%;
+  background-color: #fff;
+}
+
+.newsletter-form__field-wrapper .field {
+  z-index: 0;
+  max-width: 685px;
+  gap: 15px;
+}
+
+.newsletter-form__message {
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.newsletter-form__message--success {
+  margin-top: 2rem;
+}
+
+.newsletter-form__button {
+  width: 100%;
+  margin: 0;
+  right: var(--inputs-border-width);
+  top: 0;
+  height: 100%;
+  z-index: 2;
+  padding: 15.5px 33px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 8px;
+  max-width: 100%;
+  font-family: "Clash Display"!important;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter-form__message {
+    justify-content: center;
+    width: 100%;
+  }
+  .newsletter-form__button{
+    max-width: 23rem;
+  }
+}
+
+.newsletter-form__button:focus-visible {
+  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0 0.4rem rgba(var(--color-foreground));
+  background-color: rgb(var(--color-background));
+}
+
+.newsletter-form__button:focus {
+  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0 0.4rem rgba(var(--color-foreground));
+  background-color: rgb(var(--color-background));
+}
+
+.newsletter-form__button:not(:focus-visible):not(.focused) {
+  box-shadow: inherit;
+  background-color: #000;
+  position: static!important;
+}
+
+.newsletter-form__button .icon {
+  width: 1.5rem;
+}
+
+.field{
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.field input{
+  border: 1px solid #CDCDCD!important;
+}
+
+.field__label{
+  top: 11px !important;
+  left: 22px !important;
+}
+
+.field__input{
+  border: 1px solid #CDCDCD;
+}
+
+.field:hover.field:after,
+.field:after{
+  box-shadow: none!important;
+}
+
+@media screen and (min-width: 749px) {
+  .field{
+    flex-wrap: nowrap;
+  }
+}
