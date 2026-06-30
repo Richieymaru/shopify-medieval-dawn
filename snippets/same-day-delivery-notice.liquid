@@ -14,6 +14,8 @@
 {%- liquid
   assign sdd_variant = variant | default: 'short'
   assign sdd_display = display | default: 'card'
+  assign sdd_info_link = settings.sdd_info_page | default: '/pages/same-day-delivery'
+  assign sdd_info_tip = settings.sdd_info_tooltip | default: 'Tap to see how our same-day delivery works'
   if sdd_variant == 'full'
     assign sdd_message = settings.sdd_message_full
   else
@@ -75,6 +77,18 @@
       text-transform: uppercase;
       color: rgb(var(--sdd-accent));
     }
+    .sdd-notice__info {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.9rem;
+      height: 1.9rem;
+      margin-inline-start: 0.4rem;
+      vertical-align: middle;
+      color: rgb(var(--sdd-accent));
+      text-decoration: none;
+    }
+    .sdd-notice__info svg { width: 1.6rem; height: 1.6rem; }
     .sdd-notice__text {
       margin: 0;
       font-size: 1.3rem;
@@ -144,7 +158,12 @@
     <div class="sdd-notice sdd-notice--card">
       <span class="sdd-notice__badge">{{ sdd_truck }}</span>
       <div class="sdd-notice__content">
-        <p class="sdd-notice__title">Get it today!</p>
+        <p class="sdd-notice__title">
+          Get it today!
+          <a class="sdd-notice__info" href="{{ sdd_info_link }}" title="{{ sdd_info_tip | escape }}" aria-label="Learn more about same-day delivery">
+            {% render 'icon-info' %}
+          </a>
+        </p>
         <div class="sdd-notice__text">
           {%- if sdd_variant == 'full' -%}
             {{ sdd_message }}
