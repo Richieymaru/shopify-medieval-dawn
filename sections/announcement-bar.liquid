@@ -101,10 +101,8 @@
       >
         {%- if section.blocks.first.settings.text != blank -%}
           {%- liquid
-            assign sdd_use_info = false
-            if settings.sdd_info_page != blank
-              assign sdd_use_info = true
-            endif
+            assign sdd_info_link = settings.sdd_info_page | default: '/pages/same-day-delivery'
+            assign sdd_use_info = settings.sdd_enabled
           -%}
           {%- if section.blocks.first.settings.link != blank and sdd_use_info == false -%}
             <a
@@ -117,7 +115,7 @@
             {%- if sdd_use_info -%}
               <a
                 class="sdd-info-icon"
-                href="{{ settings.sdd_info_page }}"
+                href="{{ sdd_info_link }}"
                 data-tooltip="{{ settings.sdd_info_tooltip | default: 'Tap to see how our same-day delivery works' | escape }}"
                 aria-label="Learn more about same-day delivery"
               >
