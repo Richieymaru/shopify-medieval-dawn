@@ -1,0 +1,74 @@
+{% comment %}
+  Renders the same-day delivery informational notice.
+  Accepts:
+  - variant: {String} 'short' (announcement bar, cart) or 'full' (product page). Default 'short'.
+
+  Reads all content from theme settings (settings.sdd_*).
+  Renders nothing when the feature is disabled or the chosen message is blank.
+
+  Usage:
+  {% render 'same-day-delivery-notice', variant: 'full' %}
+{% endcomment %}
+
+{%- liquid
+  assign sdd_variant = variant | default: 'short'
+  if sdd_variant == 'full'
+    assign sdd_message = settings.sdd_message_full
+  else
+    assign sdd_message = settings.sdd_message_short
+  endif
+-%}
+
+{%- if settings.sdd_enabled and sdd_message != blank -%}
+  {%- style -%}
+    .sdd-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      padding: 0.8rem 1rem;
+      margin: 1rem 0;
+      border: 1px solid rgba(var(--color-foreground), 0.15);
+      border-radius: var(--inputs-radius, 0.4rem);
+      background: rgba(var(--color-foreground), 0.04);
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
+    .sdd-notice--short { margin: 0.6rem 0; padding: 0.6rem 0.9rem; font-size: 1.3rem; }
+    .sdd-notice__icon { flex: 0 0 auto; width: 1.8rem; height: 1.8rem; margin-top: 0.1rem; }
+    .sdd-notice__icon .icon { width: 100%; height: 100%; }
+    .sdd-notice__body { flex: 1 1 12rem; }
+    .sdd-notice__body > * { margin: 0; }
+    .sdd-notice__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .sdd-notice__cta .icon { width: 1.5rem; height: 1.5rem; }
+  {%- endstyle -%}
+
+  <div class="sdd-notice sdd-notice--{{ sdd_variant }}">
+    <span class="sdd-notice__icon" aria-hidden="true">{% render 'icon-info' %}</span>
+    <div class="sdd-notice__body">
+      {%- if sdd_variant == 'full' -%}
+        {{ sdd_message }}
+      {%- else -%}
+        <p>{{ sdd_message | escape }}</p>
+      {%- endif -%}
+      {%- if settings.sdd_messenger_url != blank -%}
+        <a
+          class="sdd-notice__cta"
+          href="{{ settings.sdd_messenger_url }}"
+          target="_blank"
+          rel="noopener"
+        >
+          {% render 'icon-facebook' %}
+          {{ settings.sdd_button_label | default: 'Message us on Messenger' | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
