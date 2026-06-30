@@ -1552,6 +1552,26 @@
       },
       {
         "type": "header",
+        "content": "Announcement bar info icon"
+      },
+      {
+        "type": "paragraph",
+        "content": "When you set a page below, the announcement bar shows an info (i) icon (with a tooltip) instead of the block's button, linking customers to a page that explains same-day delivery."
+      },
+      {
+        "type": "url",
+        "id": "sdd_info_page",
+        "label": "Same-day delivery info page",
+        "info": "Pick the page that explains same-day delivery (e.g. Pages > Same Day Delivery). Leave blank to keep the normal announcement button."
+      },
+      {
+        "type": "text",
+        "id": "sdd_info_tooltip",
+        "label": "Info icon tooltip text",
+        "default": "Tap to see how our same-day delivery works"
+      },
+      {
+        "type": "header",
         "content": "Show in these locations"
       },
       {

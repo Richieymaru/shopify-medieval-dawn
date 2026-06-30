@@ -3,7 +3,60 @@
 
 {% style %}
   .announcement-bar__message span:nth-child(1){
-    font-weight: 300!important;
+    font-weight: 700!important;
+    letter-spacing: 0.04em;
+  }
+
+  /* Same-day delivery info icon + tooltip in the announcement bar */
+  .sdd-info-icon{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    margin-inline-start: 0.7rem;
+    border-radius: 999px;
+    color: inherit;
+    vertical-align: middle;
+    position: relative;
+    animation: sdd-info-pulse 1.8s ease-out infinite;
+  }
+  .sdd-info-icon svg{ width: 1.6rem; height: 1.6rem; }
+  @keyframes sdd-info-pulse{
+    0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.5); }
+    70%  { box-shadow: 0 0 0 0.7rem rgba(255,255,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  }
+  .sdd-info-icon::after{
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 0.7rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(0.3rem);
+    width: max-content;
+    max-width: 24rem;
+    padding: 0.7rem 0.9rem;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.35;
+    text-transform: none;
+    border-radius: 0.6rem;
+    box-shadow: 0 0.4rem 1.2rem rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    z-index: 6;
+  }
+  .sdd-info-icon:hover::after,
+  .sdd-info-icon:focus-visible::after{
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .sdd-info-icon{ animation: none; }
   }
 {% endstyle %}
 
@@ -47,7 +100,13 @@
         {{ block.shopify_attributes }}
       >
         {%- if section.blocks.first.settings.text != blank -%}
-          {%- if section.blocks.first.settings.link != blank -%}
+          {%- liquid
+            assign sdd_use_info = false
+            if settings.sdd_info_page != blank
+              assign sdd_use_info = true
+            endif
+          -%}
+          {%- if section.blocks.first.settings.link != blank and sdd_use_info == false -%}
             <a
               href="{{ section.blocks.first.settings.link }}"
               class="announcement-bar__link link link--text focus-inset animate-arrow"
@@ -55,14 +114,22 @@
           {%- endif -%}
           <p class="announcement-bar__message h5">
             <span>{{ section.blocks.first.settings.text | escape }}</span>
-            {%- if section.blocks.first.settings.btn_text != blank -%}
+            {%- if sdd_use_info -%}
+              <a
+                class="sdd-info-icon"
+                href="{{ settings.sdd_info_page }}"
+                data-tooltip="{{ settings.sdd_info_tooltip | default: 'Tap to see how our same-day delivery works' | escape }}"
+                aria-label="Learn more about same-day delivery"
+              >
+                {% render 'icon-info' %}
+              </a>
+            {%- elsif section.blocks.first.settings.btn_text != blank -%}
               <span class="btn-text">{{ section.blocks.first.settings.btn_text | upcase }}</span>
             {%- elsif section.blocks.first.settings.link != blank -%}
               {% render 'icon-arrow' %}
-            {%- else -%}
             {%- endif -%}
           </p>
-          {%- if section.blocks.first.settings.link != blank -%}
+          {%- if section.blocks.first.settings.link != blank and sdd_use_info == false -%}
             </a>
           {%- endif -%}
         {%- endif -%}

@@ -32,40 +32,48 @@
   {%- endcapture -%}
 
   {%- style -%}
-    .sdd-notice { --sdd-accent: 22, 163, 74; }
+    .sdd-notice { --sdd-accent: 220, 38, 38; }
 
-    /* ----- Card (cart + product): reads as a perk, not a warning ----- */
+    /* ----- Card (cart + product): red, urgent, attention-grabbing ----- */
     .sdd-notice--card {
       display: flex;
       align-items: flex-start;
       gap: 1rem;
-      margin: 1.2rem 0;
-      padding: 1.1rem 1.2rem;
-      border: 1px solid rgba(var(--sdd-accent), 0.28);
+      margin: 1.4rem 0;
+      padding: 1.3rem 1.4rem;
+      border: 2px solid rgba(var(--sdd-accent), 0.55);
       border-radius: 1.2rem;
       background:
-        linear-gradient(135deg, rgba(var(--sdd-accent), 0.12), rgba(var(--sdd-accent), 0.03));
+        linear-gradient(135deg, rgba(var(--sdd-accent), 0.16), rgba(var(--sdd-accent), 0.04));
+      box-shadow: 0 0.4rem 1.4rem rgba(var(--sdd-accent), 0.20);
     }
     .sdd-notice__badge {
       flex: 0 0 auto;
-      width: 3.4rem;
-      height: 3.4rem;
+      width: 3.6rem;
+      height: 3.6rem;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 999px;
       background: rgb(var(--sdd-accent));
-      box-shadow: 0 0.3rem 0.8rem rgba(var(--sdd-accent), 0.4);
+      box-shadow: 0 0 0 0 rgba(var(--sdd-accent), 0.55);
+      animation: sdd-pulse 1.8s ease-out infinite;
+    }
+    @keyframes sdd-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(var(--sdd-accent), 0.55); }
+      70%  { box-shadow: 0 0 0 1rem rgba(var(--sdd-accent), 0); }
+      100% { box-shadow: 0 0 0 0 rgba(var(--sdd-accent), 0); }
     }
     .sdd-notice__badge svg { width: 1.9rem; height: 1.9rem; color: #fff; }
     .sdd-notice__content { flex: 1 1 12rem; min-width: 0; }
     .sdd-notice__title {
-      margin: 0 0 0.2rem;
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      line-height: 1.15;
-      color: rgb(var(--color-foreground));
+      margin: 0 0 0.3rem;
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: rgb(var(--sdd-accent));
     }
     .sdd-notice__text {
       margin: 0;
@@ -117,6 +125,7 @@
     @media (prefers-reduced-motion: reduce) {
       .sdd-notice__cta { transition: none; }
       .sdd-notice__cta:hover { transform: none; }
+      .sdd-notice__badge { animation: none; }
     }
   {%- endstyle -%}
 
