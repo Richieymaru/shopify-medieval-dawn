@@ -4,16 +4,22 @@
 {% style %}
   .announcement-bar__message span:nth-child(1){
     font-weight: 700!important;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
   }
 
-  /* Keep the message text and the info icon on one line */
+  /* Keep the message text and the info icon on one line, without overflowing */
   .announcement-bar__message{
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 0.2rem;
+    gap: 0.3rem;
+    max-width: 100%;
+  }
+  @media screen and (max-width: 749px){
+    .announcement-bar__message{ font-size: 1.2rem; }
+    .sdd-info-icon{ width: 1.7rem; height: 1.7rem; }
+    .sdd-info-icon svg{ width: 1.35rem; height: 1.35rem; }
   }
 
   /* Same-day delivery info icon + tooltip in the announcement bar */
