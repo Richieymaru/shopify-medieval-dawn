@@ -1524,18 +1524,18 @@
         "type": "text",
         "id": "sdd_message_short",
         "label": "Short message (announcement bar & cart)",
-        "default": "Same-day delivery, 10AM–9PM — pay via GCash, Maya, or card."
+        "default": "Order between 10AM–9PM for same-day delivery — pay via GCash, Maya, or card."
       },
       {
         "type": "richtext",
         "id": "sdd_message_full",
         "label": "Full message (product page)",
-        "default": "<p>Order today and get it <strong>same-day (10AM–9PM)</strong> when you pay online with GCash, Maya, or card.</p>"
+        "default": "<p>Place your order between <strong>10AM and 9PM</strong> and get it the same day when you pay online with GCash, Maya, or card.</p>"
       },
       {
         "type": "text",
         "id": "sdd_hours",
-        "label": "Delivery hours label",
+        "label": "Order window for same-day (e.g. 10AM–9PM)",
         "default": "10AM–9PM"
       },
       {

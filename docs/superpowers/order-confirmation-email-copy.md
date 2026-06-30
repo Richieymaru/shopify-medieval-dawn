@@ -24,10 +24,10 @@ notice to it.
 <table style="width:100%;margin:16px 0;border:1px solid #e3e3e3;border-radius:6px;background:#f7f7f7;">
   <tr>
     <td style="padding:14px 16px;font-family:Helvetica,Arial,sans-serif;font-size:14px;color:#1a1a1a;line-height:1.5;">
-      <strong>🚚 Get it today! Same-day delivery available (10AM–9PM).</strong><br>
-      Same-day delivery is available for orders paid online with GCash, Maya, or card.
-      It is <strong>not available for Cash on Delivery</strong>.
-      To arrange same-day delivery,
+      <strong>🚚 Get it today! Order between 10AM–9PM for same-day delivery.</strong><br>
+      Place your order within those hours and pay online with GCash, Maya, or card to get it the same day.
+      Same-day delivery is <strong>not available for Cash on Delivery</strong>.
+      To arrange it,
       <a href="https://m.me/MedievalMNL" style="color:#1a73e8;">message us on Messenger</a>.
     </td>
   </tr>
@@ -37,7 +37,7 @@ notice to it.
 ## Plain-text fallback (if you maintain a text version)
 
 ```
-Get it today! Same-day delivery (10AM–9PM) is available for orders paid online with GCash, Maya, or card — not for Cash on Delivery. Message us on Messenger to arrange: https://m.me/MedievalMNL
+Get it today! Order between 10AM–9PM and pay online with GCash, Maya, or card to get it the same day — not available for Cash on Delivery. Message us on Messenger to arrange: https://m.me/MedievalMNL
 ```
 
 ## Notes
