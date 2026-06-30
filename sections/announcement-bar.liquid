@@ -7,6 +7,15 @@
     letter-spacing: 0.04em;
   }
 
+  /* Keep the message text and the info icon on one line */
+  .announcement-bar__message{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+  }
+
   /* Same-day delivery info icon + tooltip in the announcement bar */
   .sdd-info-icon{
     display: inline-flex;
