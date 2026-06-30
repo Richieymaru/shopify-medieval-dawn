@@ -1,1 +1,108 @@
-{"name":"t:sections.header.name","type":"header","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement-bar-0":{"type":"announcement","settings":{"text":"🇵🇭 FREE SHIPPING ON ALL PRODUCTS","btn_text":"SHOP NOW","link":"shopify:\/\/collections\/new-release"}}},"block_order":["announcement-bar-0"],"settings":{"color_scheme":"scheme-3","show_line_separator":true,"show_social":false,"auto_rotate":false,"change_slides_speed":5,"enable_country_selector":false,"enable_language_selector":false}},"header":{"type":"header","settings":{"logo_position":"middle-left","menu":"header","menu_type_desktop":"dropdown","sticky_header_type":"on-scroll-up","show_line_separator":true,"color_scheme":"scheme-1","menu_color_scheme":"scheme-1","enable_country_selector":false,"enable_language_selector":false,"enable_customer_avatar":true,"mobile_logo_position":"center","margin_bottom":0,"padding_top":12,"padding_bottom":12}},"countdown_timer_headerbar_x9ntMK":{"type":"countdown-timer-headerbar","disabled":true,"settings":{"bg_color":"#ffffff","timer_section_title":"JOIN THE WAITLIST:","subtitle_text_color":"#000000","subtitle_font_weight":"700","date_picker":"03\/03\/2025","timer_color":"#000000","timer_section_btn_link":"https:\/\/medievalmnl.com\/account\/register","timer_section_btn_text":"SIGN UP","cta_bg_color":"#000000","cta_text_color":"#ffffff"}},"1743005078c2610ba0":{"type":"apps","blocks":{"klaviyo_email_marketing_sms_form_embed_block_7FJcU7":{"type":"shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/form-embed-block\/2632fe16-c075-4321-a88b-50b567f42507","settings":{"formId":""}}},"block_order":["klaviyo_email_marketing_sms_form_embed_block_7FJcU7"],"settings":{"include_margins":true}}},"order":["announcement-bar","header","countdown_timer_headerbar_x9ntMK","1743005078c2610ba0"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "🇵🇭 SAME DAY DELIVERY IS NOW AVAILABLE",
+            "btn_text": "SHOP NOW",
+            "link": "shopify://collections/new-release"
+          }
+        },
+        "announcement_xDjGYN": {
+          "type": "announcement",
+          "disabled": true,
+          "settings": {
+            "text": "Welcome to our store",
+            "btn_text": "SHOP NOW",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0",
+        "announcement_xDjGYN"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "show_line_separator": true,
+        "show_social": false,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "menu": "header",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "enable_customer_avatar": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "countdown_timer_headerbar_x9ntMK": {
+      "type": "countdown-timer-headerbar",
+      "disabled": true,
+      "settings": {
+        "bg_color": "#ffffff",
+        "timer_section_title": "JOIN THE WAITLIST:",
+        "subtitle_text_color": "#000000",
+        "subtitle_font_weight": "700",
+        "date_picker": "03/03/2025",
+        "timer_color": "#000000",
+        "timer_section_btn_link": "https://medievalmnl.com/account/register",
+        "timer_section_btn_text": "SIGN UP",
+        "cta_bg_color": "#000000",
+        "cta_text_color": "#ffffff"
+      }
+    },
+    "1743005078c2610ba0": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_7FJcU7": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": ""
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_7FJcU7"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "countdown_timer_headerbar_x9ntMK",
+    "1743005078c2610ba0"
+  ]
+}
